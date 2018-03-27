@@ -29,7 +29,7 @@
       width:640px;
       margin:0 auto;
       padding-top:60px;
-    }
+      }
 
     #game-table{
       width: 700px;
@@ -37,6 +37,25 @@
       margin: 0 auto;
       background:url("http://connect4.gamesolver.org/image?pos=null") 0 0 no-repeat;
       position:relative;
+      }
+
+    .disc{
+      position:absolute;
+      z-index:-1;
+      top:-55px;
+      left:14px;
+      width:46px;
+      height:46px;
+      border-radius:46px;
+      transition:all .3s;
+    }
+
+    .disc.red{
+      background:#d96666;
+    }
+
+    .disc.yellow{
+      background:#ffeb79;
     }
 
   </style>
@@ -50,5 +69,6 @@
     </div>
   </div><!-- end base -->
 
+  <script src="connect4.js" charset="utf-8"></script>
   </body>
 </html>
