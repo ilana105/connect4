@@ -23,10 +23,22 @@ function prepareField(){
     }
   }
 }
+
 /*initialize the board and starts a new game.
   randNum = randommize who goes first
 */
 function newgame(){
   prepareField();
   let randNum = (Math.floor(Math.random()*2)+1);
+  placeDisc(randNum);
+}
+
+//function that places the disc in its respective position but doesn't display on screen
+function placeDisc(row,col){
+  // TODO:
+}
+
+//function that creates the disc
+function makeDisc(player){
+  // TODO:
 }
