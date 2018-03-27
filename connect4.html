@@ -2,62 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel = "stylesheet" type = "text/css" href = "css/game.css">
     <title>CONNECT4!</title>
   </head>
 
   <style media="screen">
-    body{
-      background:#eff;
-    }
-
-    h1{
-      text-align:center;
-      margin-bottom:10px;
-    }
-
-    p.info{
-      text-align:center;
-      width:500px;
-      margin:0 auto;
-      font-size:18px;
-      font-weight:bold;
-      color:#e16;
-      margin-bottom:20px;
-      }
-
-    game-base{
-      width:640px;
-      margin:0 auto;
-      padding-top:60px;
-      }
-
-    #game-table{
-      width: 700px;
-      height: 700px;
-      margin: 0 auto;
-      background:url("http://connect4.gamesolver.org/image?pos=null") 0 0 no-repeat;
-      position:relative;
-      }
-
-    .disc{
-      position:absolute;
-      z-index:-1;
-      top:-55px;
-      left:14px;
-      width:46px;
-      height:46px;
-      border-radius:46px;
-      transition:all .3s;
-    }
-
-    .disc.red{
-      background:#d96666;
-    }
-
-    .disc.yellow{
-      background:#ffeb79;
-    }
-
   </style>
   <body>
     <h1>Connect Four Game</h1>
