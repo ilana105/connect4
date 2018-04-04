@@ -13,57 +13,56 @@
   <body>
     <h1>Connect Four</h1>
 
-    <p class="info">Connect4 is a <strong>two player</strong> game, no AI involved. Select a color and click 'start game' to begin. The winner is determined by whomever gets <strong>4 pieces in a row</strong> (horizontally, vertically, diagonally). <br> <button id = "startGame" onclick = "startGame()">Start Game</button> <button id = "restartGame" onclick = "restartGame()">Try Again</button></p>
+    <p class="info">Connect4 is a <strong>two player</strong> game, no AI involved. Select a color and click 'start game' to begin. The winner is determined by whomever gets <strong>4 pieces in a row</strong> (horizontally, vertically, diagonally). <br> <button id = "startGame" onclick = "startGame()">Start Game</button> <button id = "restartGame" onclick = "restartGame()">Play Again</button></p>
 
     <div class = "player1"><span class = "chip"></span><br>Player 1
       <button id = "p1ColorChange" onclick="document.querySelector('div.player1').style.color = changeColor(colorPalette2)">Select Color</button>
     </div>
 
+    <div id = "gridContainer"></div>
+
     <div class = "player2"><span class = "chip"></span><br>Player 2
       <button id = "p2ColorChange" onclick="document.querySelector('div.player2').style.color = changeColor(colorPalette1)">Select Color</button>
     </div>
 
-  <div id="game-base">
-    <div id="game-table">
-
-    </div>
-  </div><!-- end base -->
-
   <script>
 
 let gameField = new Array();
-let board = document.getElementById("game-table");
 let currCol;
 let currRow;
 let currPlayer;
 const player1 = 1;
 const player2 = 2;
+const numCols = 7;
+const numRows = 6;
+const cellWidth = 85;
+const cellSpacing = 1;
+
+
+const container = document.querySelector("#gridContainer");
+
+const span = document.createElement('span');
+span.className = 'cell';
+
+const cells = [];
+
+	for (let row = 0; row < numRows; row++) {
+		cells.push([]);
+		for (let col = 0; col < numCols; col++) {
+			let cell = span.cloneNode();
+			cell.style.left = `${col * (cellWidth + cellSpacing)}px`;
+			cell.style.top = `${row * (cellWidth + cellSpacing)}px`;
+			container.appendChild(cell);
+			cells[row][col] = cell;
+		}
+	}
 
 newGame();
-
-/*function that creates the 6x7 board
-2D array, each index with a number in it representing the 'value' of that position
-0 - empty
-1 - player1
-2 - player2
-*/
-function prepareField(){
-  gameField = new Array();
-
-  for(let row = 0; row < 6; row++){
-    gameField[row] = new Array();
-
-    for(let col = 0; col < 7; col++){
-      gameField[row].push(0);
-    }
-  }
-}
 
 /*initialize the board and starts a new game.
   randNum = randommize who goes first
 */
 function newGame(){
-  prepareField();
   let randNum = (Math.floor(Math.random() * 2) + 1);
   placeDisc(randNum);
 }
