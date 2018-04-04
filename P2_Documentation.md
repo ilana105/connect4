@@ -21,33 +21,21 @@
 2. Putting sound for when the player "drops" their piece onto the board
 3. Changing the number of pieces in order to connect to win, like instead of four pieces, it could be five, etc.
 4. Keeping track of the wins and losses of each player in storage
-5. Implement a coin flip to determine who goes first
+5. Implement a coin flip to determine who goes first (did this, but with just using a randomizer)
 
 ### Plan/Process:
   It will be a tile-based game because it is realistic and doable since we got some experience with tile-base programs recently.
 Functions will include a restart/play again button after a winner/tie is declared. Player 1 will always go first, unless we implement
 something else. The color that correspond to each player will be their font color, i.e Player 1 is red, the font and playing piece will red. We plan to work on the code through GitHub since it will be easy to see the changes each member did and such.
 
-[] Getting the basic board layout working
-
-[] Basic design layout done
-
-[] Pick out opposite color palettes that will fit with the theme
-
-[] Function to change the Player's respective colors - changing the token color and font color
-
-[] Button to restart the game - clearing the board
-
-[] Stats button to show the locally stored information on the wins/loss record for each player
-
-*subject to change*
-
 ### Design:
   Having the board centered, Player 1 will be shown on the left and Player 2 will be shown on the right. The title will be shown centered and the buttons will be below that. The buttons will include (restart) and (stats)^1. If there is a timer, it will be shown below each player's name. Selecting the color will be above the names.
+  
+  As of right now, the board is still centered and having both Player's name on each side. There are small buttons below the Player to change color that will lose its visibility once the player clicks 'start game' and will reappear once the player clicks 'play again'. The start button will start the game, setting the chip color of each player. Then the 'play again' button will become visible once the user starts playing (it is meant to only be pressed if it's the end of the game by either a tie or a win/loss).
 
 ^1*will only be there if we implement the scoring system
 
 ### Contributions-
-**Ilana**- Typed up the formal write-up on github.
+**Ilana**- Typed up the formal write-up on github. Created the functions to start the game and play again. Also did the functioning for changing the player's colors and have that correspond with the chip color. Created the basic board layout, and then did the basic functioning of placing each chip. Did the positioning of the player's divs and the board.
 
 **Calvin**-
