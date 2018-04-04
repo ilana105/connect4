@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" type = "text/css" href = "css/game.css">
 <link href="https://fonts.googleapis.com/css?family=Cuprum|Sigmar+One" rel="stylesheet">
     <title>CONNECT4!</title>
@@ -14,12 +15,12 @@
 
     <p class="info">Connect4 is a <strong>two player</strong> game, no AI involved. The winner is determined by whomever gets <strong>4 pieces in a row</strong> (horizontally, vertically, diagonally).</p>
 
-    <div class = "player1">Player 1
-      <button onclick="document.querySelector('div.player1').style.color = changeColor(colorPalette2)">New Color</button>
+    <div class = "player1"><span class = "chip"></span><br>Player 1
+      <button id = "p1ColorChange" onclick="document.querySelector('div.player1').style.color = changeColor(colorPalette2)">New Color</button>
     </div>
 
-    <div class = "player2">Player 2
-      <button onclick="document.querySelector('div.player2').style.color = changeColor(colorPalette1)">New Color</button>
+    <div class = "player2"><span class = "chip"></span><br>Player 2
+      <button id = "p2ColorChange" onclick="document.querySelector('div.player2').style.color = changeColor(colorPalette1)">New Color</button>
     </div>
 
   <div id="game-base">
@@ -77,26 +78,39 @@ function makeDisc(player){
   // TODO:
 }
 
-let p1Color = document.querySelector("div.player1");
-let p2Color = document.querySelector("div.player2");
+let p1 = document.querySelector("#p1ColorChange");
+let p2 = document.querySelector("#p2ColorChange");
 
 //default color values for the player
 let colorPalette1 = ["#ff9999", "#CC0000", "#800000"];
 let colorPalette2 = ["#99e6ff", "#0099cc", "#006080"];
 
 let index = 0;
-/*
-Sets the color of the chips and name
-*/
-function changeColor(array) {
-  if (index < 3)
-    index++;
 
-  else
-    index = 0;
+//sets the color of the disc when the user clicks a button
+function changeColor(array) {
+ 	index++;
+
+ 	if (index == 3)
+ 		index = 0;
 
 	return array[index]
 }
+
+function changeChipColor (p) {
+	let chip = document.querySelectorAll('span.chip');
+	let p1Color = document.querySelector("div.player1");
+	let p2Color = document.querySelector("div.player2");
+
+	if (p == 1)
+		chip[0].style.backgroundColor = p1Color.style.color;
+
+	else if (p == 2)
+		chip[1].style.backgroundColor = p2Color.style.color;
+}
+
+p1.addEventListener("click", () => {changeChipColor(1); }, false);
+p2.addEventListener("click", () => {changeChipColor(2); }, false);
 
   </script>
   </body>

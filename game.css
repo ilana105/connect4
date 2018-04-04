@@ -44,12 +44,20 @@
       transition:all .3s;
     }
 
-    .disc.red{
-      background:#d96666;
+    .chip {
+      height: 90px;
+      width: 90px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: auto;
     }
 
-    .disc.yellow{
-      background:#ffeb79;
+    .disc.p1{
+      background: #d96666;
+    }
+
+    .disc.p2 {
+      background: #ffeb79;
     }
 
     div.player1, div.player2 {
@@ -68,10 +76,24 @@
     }
 
     div.player2 {
-      transform: translateY(190px);
+      transform: translateY(100px);
       margin-right: 10px;
       padding-right: 52px;
       float: right;
       text-align: right;
       color: #cc0000;
+    }
+
+    button {
+      background-color: #555555;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    @media only screen and (max-width: 600px) {
+
     }
