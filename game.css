@@ -16,7 +16,6 @@
       font-size:18px;
       font-weight:bold;
       color: #000066;
-      margin-bottom:0px;
       }
 
     game-base{
@@ -66,7 +65,7 @@
       margin: 10px;
       border-style: solid;
       width: 10%;
-      transform: translateY(300px);
+      transform: translateY(200px);
     }
 
     div.player1 {
@@ -76,7 +75,7 @@
     }
 
     div.player2 {
-      transform: translateY(100px);
+      transform: translateY(-10px);
       margin-right: 10px;
       padding-right: 52px;
       float: right;
@@ -91,9 +90,23 @@
       text-align: center;
       text-decoration: none;
       display: inline-block;
+      font-size: 14px;
+    }
+
+    #startGame {
+      background-color: #AAAAAA;
+      margin: 0 auto;
+      padding: 10px 24px;
       font-size: 16px;
+      border-radius: 12px;
     }
 
-    @media only screen and (max-width: 600px) {
-
+    #restartGame {
+      visibility: hidden;
+      background-color: #BBBBBB;
+      margin: 0 auto;
+      padding: 10px 24px;
+      font-size: 16px;
+      border-radius: 12px;
     }
+

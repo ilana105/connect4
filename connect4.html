@@ -13,14 +13,14 @@
   <body>
     <h1>Connect Four</h1>
 
-    <p class="info">Connect4 is a <strong>two player</strong> game, no AI involved. The winner is determined by whomever gets <strong>4 pieces in a row</strong> (horizontally, vertically, diagonally).</p>
+    <p class="info">Connect4 is a <strong>two player</strong> game, no AI involved. Select a color and click 'start game' to begin. The winner is determined by whomever gets <strong>4 pieces in a row</strong> (horizontally, vertically, diagonally). <br> <button id = "startGame" onclick = "startGame()">Start Game</button> <button id = "restartGame" onclick = "restartGame()">Try Again</button></p>
 
     <div class = "player1"><span class = "chip"></span><br>Player 1
-      <button id = "p1ColorChange" onclick="document.querySelector('div.player1').style.color = changeColor(colorPalette2)">New Color</button>
+      <button id = "p1ColorChange" onclick="document.querySelector('div.player1').style.color = changeColor(colorPalette2)">Select Color</button>
     </div>
 
     <div class = "player2"><span class = "chip"></span><br>Player 2
-      <button id = "p2ColorChange" onclick="document.querySelector('div.player2').style.color = changeColor(colorPalette1)">New Color</button>
+      <button id = "p2ColorChange" onclick="document.querySelector('div.player2').style.color = changeColor(colorPalette1)">Select Color</button>
     </div>
 
   <div id="game-base">
@@ -68,6 +68,20 @@ function newGame(){
   placeDisc(randNum);
 }
 
+function startGame() {
+	document.getElementById("p1ColorChange").style.visibility = "hidden"; //hides the buttons to change colors, so that the players cant change colors during the game
+  	document.getElementById("p2ColorChange").style.visibility = "hidden";
+  	document.getElementById("restartGame").style.visibility = "visible";
+  	document.getElementById("startGame").style.visibility = "hidden";
+}
+
+function restartGame() {
+	document.getElementById("p1ColorChange").style.visibility = "visible";
+  	document.getElementById("p2ColorChange").style.visibility = "visible";
+    document.getElementById("restartGame").style.visibility = "hidden";
+  	document.getElementById("startGame").style.visibility = "visible";
+}
+
 //function that places the disc in its respective position but doesn't display on screen
 function placeDisc(row,col){
   // TODO:
@@ -97,6 +111,7 @@ function changeColor(array) {
 	return array[index]
 }
 
+//changes the chip color depending on which button was pressed
 function changeChipColor (p) {
 	let chip = document.querySelectorAll('span.chip');
 	let p1Color = document.querySelector("div.player1");
