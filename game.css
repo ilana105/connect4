@@ -17,7 +17,7 @@
       font-weight:bold;
       color: #000066;
       }
-      
+
     .chip {
       height: 90px;
       width: 90px;
@@ -81,12 +81,12 @@
   #gridContainer{
     background-color: black;
     top:250px;
-    left:335px;
+    left:30%;
     padding:0;
     margin: 0 auto;
     display:inline-block;
     position: absolute;
-}
+  }
     span.cell{
     height:75px;
     width:75px;
@@ -97,14 +97,14 @@
     position:absolute;
     border-radius: 50%;
   }
-  
+
   /* Get rid of the cell border when it is selected */
   span.cellSelected{
     height:75px;
     width:75px;
-    background-color: red;
+    background-color: white;
     padding:0;
     margin:0;
     position:absolute;
+    border-radius: 50%
   }
-  
