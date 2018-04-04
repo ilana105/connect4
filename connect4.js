@@ -42,6 +42,7 @@ for (let row = 0; row < numRows; row++) {
 		cell.style.top = `${row * (cellWidth + cellSpacing)}px`;
 		container.appendChild(cell);
 		cells[row][col] = cell;
+		cells[row][col].innerHTML = "0" 
 	}
 }
 //--------------------End Board-------------------------
@@ -68,6 +69,9 @@ function startGame() {
 
 	player1startColor = p1changedColor.style.color;
 	player2startColor = p2changedColor.style.color;
+
+
+	document.getElementById("gridContainer").style.pointerEvents = "auto";
 }
 
 function restartGame() {
@@ -84,10 +88,11 @@ function restartGame() {
 
 	let cells = document.getElementsByClassName("cellSelected");
 	//debugger;
-	for (let el of cells){
-		el.style.backgroundColor = "#FFF";
-		el.className = "cell";
+	while(cells.length){
+		cells[0].className = "cell";
 	}
+
+	document.getElementById("gridContainer").style.pointerEvents = "none";
 }
 
 //-----------------------------COLOR Options------------------------------
@@ -131,16 +136,17 @@ function placeChip (e) {
 	let columnWidth = cellWidth + cellSpacing;
 	let col = Math.floor(mouseX/columnWidth);
 	let row = Math.floor(mouseY/columnWidth);
-	let newCol = check(row, col)
-	let selectedCell = cells[row][newCol];
+	let newRow = check(row, col)
+	let selectedCell = cells[newRow][col];
 
-	if (isOccupied(row, newCol)) {
+	//if (isOccupied(row, newCol)) {
 		//alert("spot is taken");
-	}
+	//}
 	selectedCell.className = 'cellSelected';
 	console.log(`${col},${row}`);
 
 	if (currPlayer == 1) {
+		selectedCell.innerHTML = "1";
 		selectedCell.style.backgroundColor = player1startColor;
 		currPlayer = 2;
 		chip[0].style.visibility = "hidden";
@@ -148,6 +154,7 @@ function placeChip (e) {
 	}
 
 	else {
+		selectedCell.innerHTML = "2";
 		selectedCell.style.backgroundColor = player2startColor;
 		currPlayer = 1;
 		chip[0].style.visibility = "visible";
@@ -159,15 +166,14 @@ function placeChip (e) {
 Checks to see if the column has other pieces
 */
 function check(row, col) {
-	for (let i = 6; i < col; i--) {
-		let nextCell = cells[row][i];
-		if (nextCell.style.backgroundColor == "#FFF")
+	for (let i = 5; i > 0; i--) {
+		if (cells[i][col].innerHTML == "0")
 			return i;
 	}
-	return col;
+	return row;
 }
 
 function isOccupied(row, col) {
 	let thisCell = cells[row][col];
-	return thisCell === 0 ? false : true;
+	return thisCell.innerHTML === 0 ? false : true;
 }

@@ -19,6 +19,7 @@
       }
 
     .chip {
+      visibility: hidden;
       height: 90px;
       width: 90px;
       border-radius: 50%;
@@ -62,6 +63,7 @@
     }
 
     #startGame {
+      visibility: visible;
       background-color: #AAAAAA;
       margin: 0 auto;
       padding: 10px 24px;
@@ -86,20 +88,11 @@
     margin: 0 auto;
     display:inline-block;
     position: absolute;
-  }
-    span.cell{
-    height:75px;
-    width:75px;
-    border:1px solid black; /* actual width & height is 25px because of border */
-    background-color: #FFF;
-    padding:0;
-    margin:0;
-    position:absolute;
-    border-radius: 50%;
+    pointer-events: none;
   }
 
   /* Get rid of the cell border when it is selected */
-  span.cellSelected{
+  .cellSelected{
     height:75px;
     width:75px;
     background-color: white;
@@ -107,4 +100,16 @@
     margin:0;
     position:absolute;
     border-radius: 50%
+  }
+
+      .cell{
+    height:75px;
+    width:75px;
+    border:1px solid black; /* actual width & height is 25px because of border */
+    background-color: #FFF !important;
+    padding:0;
+    margin:0;
+    position:absolute;
+    border-radius: 50%;
+    color: #eff;
   }
