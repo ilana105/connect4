@@ -3,10 +3,10 @@
       background:#eff;
     }
 
-    h1{
+    h1, h3{
       font-family: 'Sigmar One', cursive;
       text-align: center;
-      margin-bottom:10px;
+      margin-bottom: 5px;
     }
 
     p.info{

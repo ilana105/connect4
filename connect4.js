@@ -10,8 +10,6 @@ const numRows = 6;
 const cellWidth = 85;
 const cellSpacing = 1;
 
-let whoWon;
-
 const container = document.querySelector("#gridContainer");
 let chip = document.querySelectorAll('span.chip');
 let p1changedColor = document.querySelector("div.player1");
@@ -48,6 +46,7 @@ for (let row = 0; row < numRows; row++) {
 }
 //--------------------End Board-------------------------
 function startGame() {
+	if (chip[0].style.visibility == "visible" && chip[1].style.visibility == "visible") {
 	//Decides who goes first by random
 	let randNum = (Math.floor(Math.random() * 2) + 1);
 
@@ -74,6 +73,9 @@ function startGame() {
 	player2startColor = p2changedColor.style.color;
 
 	document.getElementById("gridContainer").style.pointerEvents = "auto";
+	}
+	else
+		alert("Please pick a color!");
 }
 
 //Button to reset the game
@@ -86,14 +88,14 @@ function restartGame() {
 	chip[0].style.visibility = "hidden";
 	chip[1].style.visibility = "hidden";
 
-	player1startColor = "";
-	player2startColor = "";
+	p1C = 0;
+	p2C = 0;
 
 	let cells = document.getElementsByClassName("cellSelected");
 	//debugger;
 	while(cells.length){
+		cells[0].innerHTML = "0";
 		cells[0].className = "cell";
-		cells.innerHTML = "0";
 	}
 
 	document.getElementById("gridContainer").style.pointerEvents = "none";
@@ -117,11 +119,15 @@ function changeColor(array) {
 
 //changes the chip color depending on which button was pressed
 function changeChipColor (p) {
-	if (p == 1)
+	if (p == 1){
 		chip[0].style.backgroundColor = p1changedColor.style.color;
+		chip[0].style.visibility = "visible";
+	}
 
-	else if (p == 2)
+	else if (p == 2){
 		chip[1].style.backgroundColor = p2changedColor.style.color;
+		chip[1].style.visibility = "visible";
+	}
 }
 //-------------------------------------------------------------------------
 
@@ -138,14 +144,15 @@ function placeChip (e) {
 	let columnWidth = cellWidth + cellSpacing;
 	let col = Math.floor(mouseX/columnWidth);
 	let row = Math.floor(mouseY/columnWidth);
+	let newRow = check(row, col)
 	if (isOccupied(row, col) == true) 
-		alert("Spot is occupied"); 
+		alert("Spot is occupied, please pick another spot!"); 
+
 	else if (!isOccupied(row, col)) {
-		let newRow = check(row, col)
 		let selectedCell = cells[newRow][col];
 
 		selectedCell.className = 'cellSelected';
-		console.log(`${col},${row}`);
+		console.log(`${col},${newRow}`);
 
 		if (currPlayer == 1) {
 			selectedCell.innerHTML = "1";
@@ -164,11 +171,26 @@ function placeChip (e) {
 		}
 	}
 
-	if (winVertically(row) == 1)
-		alert("Player 1 won!");
+	//verticalWin(newRow, col)
+	if (winVertically(newRow, col) == 1) {
+		alert("P1 wins");
+		restartGame();
+	}
 
-	else if (winVertically(row) == 2)
-		alert("Player 2 won!");
+	else if (winVertically(newRow, col) == 2){
+		alert("P2 Wins");
+		restartGame();
+	}
+
+	if (winHorizontally(newRow, col) == 1) {
+		alert("P1 wins");
+		restartGame();
+	}
+
+	else if (winHorizontally(newRow, col) == 2){
+		alert("P2 Wins");
+		restartGame();
+	}
 }
 
 /*
@@ -179,38 +201,33 @@ function check(row, col) {
 		if (cells[i][col].innerHTML == "0")
 			return i;
 	}
+
 	return row;
 }
 
 function isOccupied(row, col) {
 	if (cells[row][col].innerHTML == "1" || cells[row][col].innerHTML == "2")
 		return true;
+
 	else if (cells[row][col].innerHTML == "0")
 		return false;
 }
 
 function winVertically(row, col) {
-	let cells = document.getElementsByClassName("cellSelected");
+	if (cells[row][col].innerHTML != "0" && cells[row + 1][col].innerHTML != "0" &&
+		cells[row + 1][col].innerHTML != "0" && cells[row + 1][col].innerHTML != "0") {
 		if (cells[row][col].innerHTML == "1" &&
-			cells[row + 1][col].innerHTML == "1" &&
-			cells[row + 2][col].innerHTML == "1" &&
-			cells[row + 3][col].innerHTML == "1") {
-			alert("Player 1 won");
-			return whoWon = 1;
-	}
+			cells[(row + 1)][col].innerHTML == "1" &&
+			cells[(row + 2)][col].innerHTML == "1" &&
+			cells[(row + 3)][col].innerHTML == "1") 
+				return 1;
 
 		else if (cells[row][col].innerHTML == "2" &&
-			cells[row + 1][col].innerHTML == "2" &&
-			cells[row + 2][col].innerHTML == "2" &&
-			cells[row + 3][col].innerHTML == "2")
-			return whoWon = 2;
-	}
-
-
-function winHorizontally() {
-
-}
-
-function winDiagonally() {
-
+			cells[(row + 1)][col].innerHTML == "2" &&
+			cells[(row + 2)][col].innerHTML == "2" &&
+			cells[(row + 3)][col].innerHTML == "2") 
+				return 2;
+		else 
+			return 0;
+		}
 }
