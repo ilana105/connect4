@@ -10,6 +10,7 @@ const numRows = 6;
 const cellWidth = 85;
 const cellSpacing = 1;
 
+let whoWon;
 
 const container = document.querySelector("#gridContainer");
 let chip = document.querySelectorAll('span.chip');
@@ -50,6 +51,7 @@ function startGame() {
 	//Decides who goes first by random
 	let randNum = (Math.floor(Math.random() * 2) + 1);
 
+	//Will display who goes first with showing the chip over the players name
 	if (randNum == 1) {
 		currPlayer = 1;
 		chip[0].style.visibility = "visible";
@@ -67,13 +69,14 @@ function startGame() {
 	document.getElementById("restartGame").style.visibility = "visible";
 	document.getElementById("startGame").style.visibility = "hidden";
 
+	//sets the color
 	player1startColor = p1changedColor.style.color;
 	player2startColor = p2changedColor.style.color;
-
 
 	document.getElementById("gridContainer").style.pointerEvents = "auto";
 }
 
+//Button to reset the game
 function restartGame() {
 	p1Button.style.visibility = "visible";
 	p2Button.style.visibility = "visible";
@@ -90,6 +93,7 @@ function restartGame() {
 	//debugger;
 	while(cells.length){
 		cells[0].className = "cell";
+		cells.innerHTML = "0";
 	}
 
 	document.getElementById("gridContainer").style.pointerEvents = "none";
@@ -125,9 +129,7 @@ function changeChipColor (p) {
 p1Button.addEventListener("click", () => {changeChipColor(1); }, false);
 p2Button.addEventListener("click", () => {changeChipColor(2); }, false);
 
-
 container.onclick = placeChip;
-
 
 function placeChip (e) {
 	let rect = container.getBoundingClientRect();
@@ -136,30 +138,37 @@ function placeChip (e) {
 	let columnWidth = cellWidth + cellSpacing;
 	let col = Math.floor(mouseX/columnWidth);
 	let row = Math.floor(mouseY/columnWidth);
-	let newRow = check(row, col)
-	let selectedCell = cells[newRow][col];
+	if (isOccupied(row, col) == true) 
+		alert("Spot is occupied"); 
+	else if (!isOccupied(row, col)) {
+		let newRow = check(row, col)
+		let selectedCell = cells[newRow][col];
 
-	//if (isOccupied(row, newCol)) {
-		//alert("spot is taken");
-	//}
-	selectedCell.className = 'cellSelected';
-	console.log(`${col},${row}`);
+		selectedCell.className = 'cellSelected';
+		console.log(`${col},${row}`);
 
-	if (currPlayer == 1) {
-		selectedCell.innerHTML = "1";
-		selectedCell.style.backgroundColor = player1startColor;
-		currPlayer = 2;
-		chip[0].style.visibility = "hidden";
-		chip[1].style.visibility = "visible";
+		if (currPlayer == 1) {
+			selectedCell.innerHTML = "1";
+			selectedCell.style.backgroundColor = player1startColor;
+			currPlayer = 2;
+			chip[0].style.visibility = "hidden";
+			chip[1].style.visibility = "visible";
+		}
+
+		else {
+			selectedCell.innerHTML = "2";
+			selectedCell.style.backgroundColor = player2startColor;
+			currPlayer = 1;
+			chip[0].style.visibility = "visible";
+			chip[1].style.visibility = "hidden";
+		}
 	}
 
-	else {
-		selectedCell.innerHTML = "2";
-		selectedCell.style.backgroundColor = player2startColor;
-		currPlayer = 1;
-		chip[0].style.visibility = "visible";
-		chip[1].style.visibility = "hidden";
-	}
+	if (winVertically(row) == 1)
+		alert("Player 1 won!");
+
+	else if (winVertically(row) == 2)
+		alert("Player 2 won!");
 }
 
 /*
@@ -174,6 +183,34 @@ function check(row, col) {
 }
 
 function isOccupied(row, col) {
-	let thisCell = cells[row][col];
-	return thisCell.innerHTML === 0 ? false : true;
+	if (cells[row][col].innerHTML == "1" || cells[row][col].innerHTML == "2")
+		return true;
+	else if (cells[row][col].innerHTML == "0")
+		return false;
+}
+
+function winVertically(row, col) {
+	let cells = document.getElementsByClassName("cellSelected");
+		if (cells[row][col].innerHTML == "1" &&
+			cells[row + 1][col].innerHTML == "1" &&
+			cells[row + 2][col].innerHTML == "1" &&
+			cells[row + 3][col].innerHTML == "1") {
+			alert("Player 1 won");
+			return whoWon = 1;
+	}
+
+		else if (cells[row][col].innerHTML == "2" &&
+			cells[row + 1][col].innerHTML == "2" &&
+			cells[row + 2][col].innerHTML == "2" &&
+			cells[row + 3][col].innerHTML == "2")
+			return whoWon = 2;
+	}
+
+
+function winHorizontally() {
+
+}
+
+function winDiagonally() {
+
 }
