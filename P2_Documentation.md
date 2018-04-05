@@ -36,6 +36,8 @@ something else. The color that correspond to each player will be their font colo
 ^1*will only be there if we implement the scoring system
 
 ### Contributions-
-**Ilana**- Typed up the formal write-up on github. Created the functions to start the game and play again. Also did the functioning for changing the player's colors and have that correspond with the chip color. Created the basic board layout, and then did the basic functioning of placing each chip. Did the positioning of the player's divs and the board.
+**Ilana**- Typed up the formal write-up on github. Created the functions to start the game and play again. Also did the functioning for changing the player's colors and have that correspond with the chip color. Created the basic board layout, and then did the basic functioning of placing each chip. Did the positioning of the player's divs and the board. Got the vertical check for winning function to work.
 
-**Calvin**-
+**Calvin**- Got the base of the game outline on HTML, CSS, and JS. Fixed the start game button so that you can only click on the board once you click colors/the button. Also fixed up the restart function to clear the board completely. Got the horizontal check for the winning function to work. Also got the diagonal check for the winning function to work. 
+
+We both agreed on using innerHTML to track the pieces on the board. One of us would create the basic outline of a function, then the other would complete and fix the bugs from that function.
